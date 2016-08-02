@@ -2,6 +2,7 @@ var gulp=require('gulp');
 var gutil=require('gulp-util');
 var jshint=require('gulp-jshint');
 var sass=require('gulp-sass');
+var sourcemaps=require('gulp-sourcemaps');
 
 gulp.task('default',['watch'],function(){
 	return gutil.log('Gulp is running!');
@@ -15,7 +16,10 @@ gulp.task('jshint',[],function(){
 });
 
 gulp.task('build-css',function(){
-	return gulp.src('source/scss/**/*.scss').pipe(sass()).pipe(gulp.dest('public/assets/stylesheets'));
+	return gulp.src('source/scss/**/*.scss')
+	.pipe(sourcemaps.init())
+	.pipe(sass())
+	.pipe(gulp.dest('public/assets/stylesheets'));
 });
 
 gulp.task('watch',function(){
